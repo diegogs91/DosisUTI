@@ -11,11 +11,11 @@ const ASSETS = [
   './',
   './index.html',
   './style.css',
-  './js/dosis.js',
-  './js/app.js',
+  './dosis.js',
+  './app.js',
   './manifest.json',
-  './icons/icon-192.png',
-  './icons/icon-512.png'
+  './icon-192.png',
+  './icon-512.png'
 ];
 
 // ── Install ───────────────────────────────────────────────────
