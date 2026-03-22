@@ -14,22 +14,27 @@ const PRO_DRUGS = new Set([
 const DRUG_CATEGORIES = [
   {
     label: 'Vasopresores e Inotrópicos',
+    labelKey: 'cat_vasopressors',
     drugs: ['Noradrenalina','Dopamina','Vasopresina','Adrenalina','Dobutamina','Milrinona','Isoproterenol','Levosimendan']
   },
   {
     label: 'Vasodilatadores',
+    labelKey: 'cat_vasodilators',
     drugs: ['Nitroglicerina','Nitroprusiato','Labetalol','Esmolol']
   },
   {
     label: 'Analgesia',
+    labelKey: 'cat_analgesia',
     drugs: ['Fentanilo','Morfina','Remifentanilo','Ketamina']
   },
   {
     label: 'Sedación',
+    labelKey: 'cat_sedation',
     drugs: ['Propofol','Midazolam','Lorazepam','Diazepam','Dexmedetomidina','Clonidina','Tiopental']
   },
   {
     label: 'Bloqueantes Neuromusculares',
+    labelKey: 'cat_nmb',
     drugs: ['Atracurio','Cisatracurio','Vecuronio','Rocuronio','Pancuronio']
   }
 ];
