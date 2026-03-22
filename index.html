@@ -211,6 +211,17 @@
 
 <!-- Scripts: dosis.js siempre, clinical.js opcional (no en repo público) -->
 <script src="dosis.js"></script>
+<script src="clinical.js" onerror="console.info('clinical.js no cargado — modo público.')"></script>
 <script src="app.js"></script>
+<!-- PWA: registrar Service Worker -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(r => console.log('SW registrado:', r.scope))
+        .catch(e => console.warn('SW error:', e));
+    });
+  }
+</script>
 </body>
 </html>
