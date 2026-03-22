@@ -1,73 +1,91 @@
 // ============================================================
 //  DosisUCI — Service Worker
-//  Estrategia: Cache First para assets, Network First para HTML
 // ============================================================
 
 const CACHE_NAME = 'dosisUCI-v3';
 
+// Solo assets locales — las URLs externas (Google Fonts)
+// NO van en addAll porque fallan con CORS y rompen el install.
+// Se cachean automáticamente en el primer fetch.
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/style.css',
-  '/dosis.js',
-  '/app.js',
-  '/manifest.json',
-  '/icon-192.png',
-  '/icon-512.png',
-  // Google Fonts (se cachean en primer uso)
-  'https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap'
+  './',
+  './index.html',
+  './style.css',
+  './js/dosis.js',
+  './js/app.js',
+  './manifest.json',
+  './icons/icon-192.png',
+  './icons/icon-512.png'
 ];
 
-// ── Install: pre-cachear assets ───────────────────────────────
+// ── Install ───────────────────────────────────────────────────
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(ASSETS))
       .then(() => self.skipWaiting())
+      .catch(err => console.warn('[SW] install error:', err))
   );
 });
 
-// ── Activate: limpiar caches viejos ──────────────────────────
+// ── Activate: eliminar caches viejos ─────────────────────────
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
-        keys
-          .filter(key => key !== CACHE_NAME)
-          .map(key => caches.delete(key))
-      )
-    ).then(() => self.clients.claim())
+    caches.keys()
+      .then(keys => Promise.all(
+        keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))
+      ))
+      .then(() => self.clients.claim())
   );
 });
 
-// ── Fetch: Cache First para assets, Network First para HTML ──
+// ── Fetch ─────────────────────────────────────────────────────
 self.addEventListener('fetch', event => {
-  const url = new URL(event.request.url);
+  const req = event.request;
+  const url = new URL(req.url);
 
-  // HTML → Network First (siempre intenta actualizar)
-  if (event.request.mode === 'navigate') {
+  // Ignorar requests que no sean GET
+  if (req.method !== 'GET') return;
+
+  // Google Fonts y otros recursos externos → Stale While Revalidate
+  if (url.origin !== location.origin) {
     event.respondWith(
-      fetch(event.request)
-        .then(response => {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-          return response;
+      caches.open(CACHE_NAME).then(cache =>
+        cache.match(req).then(cached => {
+          const fresh = fetch(req).then(response => {
+            if (response.ok) cache.put(req, response.clone());
+            return response;
+          }).catch(() => cached); // sin red → usar cache
+          return cached || fresh;
         })
-        .catch(() => caches.match('/index.html'))
+      )
     );
     return;
   }
 
-  // Assets → Cache First
-  event.respondWith(
-    caches.match(event.request).then(cached => {
-      if (cached) return cached;
-      return fetch(event.request).then(response => {
-        if (!response || response.status !== 200 || response.type === 'opaque') {
+  // Navegación (HTML) → Network First
+  if (req.mode === 'navigate') {
+    event.respondWith(
+      fetch(req)
+        .then(response => {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(c => c.put(req, clone));
           return response;
+        })
+        .catch(() => caches.match('./index.html'))
+    );
+    return;
+  }
+
+  // Assets locales → Cache First
+  event.respondWith(
+    caches.match(req).then(cached => {
+      if (cached) return cached;
+      return fetch(req).then(response => {
+        if (response.ok) {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(c => c.put(req, clone));
         }
-        const clone = response.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
         return response;
       });
     })
