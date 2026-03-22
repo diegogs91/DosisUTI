@@ -1,0 +1,80 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset=ISO-8859-1>
+<title>Dosis de Medicamentos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="jquery.mobile-1.4.5/jquery.mobile-1.4.5.css" />
+<script src="jquery.mobile-1.4.5/jquery-2.x-git.min.js"></script>
+<script src="jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+</head>
+<!--pagina-->
+<body>
+<!--Pagina: Dosis-->
+<div data-role="page" id="ayuda1" data-theme="b" data-fullscreen="true" class="noselect">
+
+<!--1:cabecera-->
+<header data-role="header"  data-theme="b" >
+ <h3>Dosis</h3>
+<a href="index.html" rel="external" data-role="button" data-icon="back" data-pos="right" type="button" data-iconpos="notext"></a>
+ 
+ </header>
+ <!--1:ayuda-->
+<div class="ui-content" data-role="main" data-theme="b" id="ayuda1">
+<video width="90%" style="position:fixed" playsinline autoplay muted loop>
+    <source src="001.mp4" type="video/mp4">
+</video>
+</div>
+<div data-role="footer"  class="ui-footer-fixed" data-theme="b" ><nav data-role="navbar" data-theme="b"><ul>
+<li><a href="index.html" data-role="button" rel="external" >Pantalla principal</a></li>
+<li><a href="#ayuda2" data-role="button" rel="external">Siguiente página</a></li></ul></nav></div>
+</div>
+</div>
+<div data-role="page" id="ayuda2" data-theme="b" data-fullscreen="true" class="noselect">
+<div class="ui-content" data-role="main" data-theme="b" id="ayuda21">
+
+<video width="100%" playsinline autoplay muted loop>
+    <source src="002.mp4" type="video/mp4">
+</video>
+</div>
+<div data-role="footer"  class="ui-footer-fixed" data-theme="b" ><nav data-role="navbar" data-theme="b"><ul>
+<li><a href="#ayuda1" data-role="button" rel="external" >Página atrás</a></li>
+<li><a href="#ayuda3" data-role="button" rel="external">Siguiente página</a></li></ul></nav></div>
+</div>
+</div>
+<div data-role="page" id="ayuda3" data-theme="b" data-fullscreen="true" class="noselect">
+<div class="ui-content" data-role="main" data-theme="b" id="ayuda31">
+
+<video width="100%" playsinline autoplay muted loop>
+    <source src="003.mp4" type="video/mp4" >
+</video>
+</div>
+<div data-role="footer"  class="ui-footer-fixed" data-theme="b" ><nav data-role="navbar" data-theme="b"><ul>
+<li><a href="#ayuda2" data-role="button" rel="external" >Página atrás</a></li>
+<li><a href="#ayuda4" data-role="button" rel="external">Siguiente página</a></li></ul></nav></div>
+</div>
+</div>
+<div data-role="page" id="ayuda4" data-theme="b" data-fullscreen="true" class="noselect">
+<div class="ui-content" data-role="main" data-theme="b" id="ayuda41">
+
+<video width="100%" playsinline autoplay muted loop>
+    <source src="004.mp4" type="video/mp4" >
+</video>
+</div>
+<div data-role="footer"  class="ui-footer-fixed" data-theme="b" ><nav data-role="navbar" data-theme="b"><ul>
+<li><a href="#ayuda3" data-role="button" rel="external" >Página atrás</a></li>
+<li><a href="#ayuda5" data-role="button" rel="external">Siguiente página</a></li></ul></nav></div>
+</div>
+</div>
+<div data-role="page" id="ayuda5" data-theme="b" data-fullscreen="true" class="noselect">
+<div class="ui-content" data-role="main" data-theme="b" id="ayuda51">
+
+<img src="ayuda.jpg" style="width:100%" draggable="false"></div>
+<div data-role="footer"  class="ui-footer-fixed" data-theme="b" ><nav data-role="navbar" data-theme="b"><ul>
+<li><a href="index.html" data-role="button" rel="external" >Pantalla principal</a></li>
+<li><a href="#ayuda1" data-role="button" rel="external">Ver ayuda nuevamente</a></li></ul></nav></div>
+</div>
+</div>
+</body>
+</html>
