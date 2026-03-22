@@ -34,45 +34,7 @@ Herramienta clínica para el cálculo rápido y preciso de velocidades de infusi
 
 ## Uso
 
-### GitHub Pages (recomendado)
-
-1. Hacer fork del repositorio
-2. Ir a **Settings → Pages → Source: main / root**
-3. Acceder en `https://TU-USUARIO.github.io/dosisUCI`
-
-### Local
-
-```bash
-git clone https://github.com/TU-USUARIO/dosisUCI.git
-cd dosisUCI
-# Abrir index.html directamente en el navegador
-# O servir localmente:
-npx serve .
-```
-
-## Estructura
-
-```
-dosisUCI/
-├── index.html       # HTML semántico, sin frameworks
-├── style.css        # Design system completo, temas claro/oscuro
-└── js/
-    ├── dosis.js     # Base de datos de medicamentos
-    └── app.js       # Lógica de la aplicación
-```
-
-## Fórmula de cálculo
-
-```
-dosis = (cant / ml) × cons / peso × velocidad_mlh
-```
-
-Para drogas independientes del peso (Vasopresina, Nitroglicerina, Morfina, Labetalol):
-```
-dosis = (cant / ml) × cons × velocidad_mlh
-```
-
-Donde `cons` es el factor de conversión de unidades específico de cada droga.
+`https://diegos91.github.io/dosisUCI`
 
 ## Aviso legal
 
