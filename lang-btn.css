@@ -1,0 +1,23 @@
+/* ── Agregar al final de style.css ───────────────────────── */
+
+/* Language toggle button */
+.lang-btn {
+  font-family: 'Space Mono', monospace;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  width: 36px; height: 36px;
+  border: 1px solid var(--border-md);
+  background: var(--bg-card2);
+  color: var(--accent);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: grid; place-items: center;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.lang-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}

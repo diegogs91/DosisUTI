@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#0b0f19" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#eef1f8"  media="(prefers-color-scheme: light)">
   <title>DosisUCI</title>
-   <!-- PWA -->
+  <!-- PWA -->
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icon-192.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -24,10 +24,12 @@
   <!-- ── Header ──────────────────────────────────────────── -->
   <header class="app-header">
     <div class="brand">
-<img src="icon.png" class="brand-icon" alt="Medi-Global Logo">
+      <img src="icon.png" class="brand-icon" alt="DosisUCI Logo">
       <span class="brand-name">DosisUCI</span>
     </div>
     <div class="header-actions">
+      <!-- Selector de idioma: cicla ES → EN → PT → ES -->
+      <button class="lang-btn" id="langToggle" aria-label="Change language">ES</button>
       <button class="icon-btn" id="aboutBtn" title="Acerca de">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
@@ -49,11 +51,11 @@
 
     <!-- Selector -->
     <section class="card selector-card">
-      <div class="card-label">Medicamento</div>
+      <div class="card-label" data-i18n="label_drug">Medicamento</div>
       <div class="select-row">
         <div class="select-wrapper">
           <select id="Med" autocomplete="off">
-            <option value="" disabled selected>Seleccionar medicamento…</option>
+            <!-- Opciones generadas por JS via rebuildDrugSelect() -->
           </select>
           <span class="select-arrow">▾</span>
         </div>
@@ -61,7 +63,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
           </svg>
-          Info
+          <span data-i18n="btn_info">Info</span>
         </button>
       </div>
     </section>
@@ -70,10 +72,13 @@
     <div id="proLockCard" class="pro-lock-card hidden">
       <div class="pro-lock-icon">🔒</div>
       <div class="pro-lock-name" id="proLockTitle"></div>
-      <p class="pro-lock-desc">Este medicamento está disponible en la <strong>versión PRO</strong> de DosisUCI.</p>
+      <p class="pro-lock-desc" data-i18n-html="pro_desc">
+        Este medicamento está disponible en la <strong>versión PRO</strong> de DosisUCI.
+      </p>
       <a class="pro-lock-btn"
          href="https://play.google.com/store/apps/details?id=com.dosisutipro.app"
-         target="_blank" rel="noopener">
+         target="_blank" rel="noopener"
+         data-i18n="pro_btn">
         Obtener versión PRO →
       </a>
     </div>
@@ -84,12 +89,12 @@
       <!-- Peso -->
       <section class="card" id="weightCard">
         <div class="peso-header">
-          <div class="card-label">Peso corporal</div>
+          <div class="card-label" data-i18n="label_weight">Peso corporal</div>
           <div class="peso-value-badge">
             <span id="pesoValue">70</span><span> kg</span>
           </div>
           <button class="link-btn" onclick="openModal('weightModal')">
-            Peso ideal
+            <span data-i18n="btn_ideal_weight">Peso ideal</span>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
               <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
             </svg>
@@ -105,14 +110,14 @@
 
       <!-- Preparación -->
       <section class="card">
-        <div class="card-label">Preparación</div>
+        <div class="card-label" data-i18n="label_prep">Preparación</div>
         <div class="prep-grid" id="prepGrid"></div>
       </section>
 
       <!-- Velocidad -->
       <section class="card">
         <div class="speed-header">
-          <div class="card-label">Velocidad de infusión</div>
+          <div class="card-label" data-i18n="label_speed">Velocidad de infusión</div>
           <div class="mlh-badge">
             <span id="mlhValue">0</span><span> ml/h</span>
           </div>
@@ -125,7 +130,7 @@
 
       <!-- Dosis calculada -->
       <section class="card dose-card" id="doseCard">
-        <div class="dose-label" id="dosismm">Dosis calculada</div>
+        <div class="dose-label" id="dosismm" data-i18n="label_dose">Dosis calculada</div>
         <div class="dose-monitor">
           <span class="dose-value" id="doseValue">0.00</span>
           <span class="dose-unit" id="doseUnit"></span>
@@ -159,32 +164,33 @@
   <div class="modal-backdrop" onclick="closeModal('weightModal')"></div>
   <div class="modal-panel">
     <div class="modal-header">
-      <h2>Peso Ideal</h2>
+      <h2 data-i18n="modal_weight_title">Peso Ideal</h2>
       <button class="modal-close" onclick="closeModal('weightModal')" aria-label="Cerrar">✕</button>
     </div>
     <div class="modal-body">
-      <p style="font-size:.85rem;color:var(--text-2);margin-bottom:1rem;">
+      <p style="font-size:.85rem;color:var(--text-2);margin-bottom:1rem;"
+         data-i18n="weight_formula_note">
         Fórmula de Devine. Usada en drogas con acumulación en tejido graso.
       </p>
       <div class="form-group">
-        <label for="altura1">Altura (cm)</label>
+        <label for="altura1" data-i18n="label_height">Altura (cm)</label>
         <input type="number" id="altura1" min="140" max="220" placeholder="170" inputmode="numeric">
       </div>
       <div class="form-group">
-        <label>Sexo</label>
+        <label data-i18n="label_sex">Sexo</label>
         <div class="radio-group">
           <label class="radio-option">
             <input type="radio" id="male1" name="sexo1" value="male">
-            <span>Masculino</span>
+            <span data-i18n="opt_male">Masculino</span>
           </label>
           <label class="radio-option">
             <input type="radio" id="fem1" name="sexo1" value="fem">
-            <span>Femenino</span>
+            <span data-i18n="opt_female">Femenino</span>
           </label>
         </div>
       </div>
       <div class="result-display">
-        <span class="result-label">Peso ideal</span>
+        <span class="result-label" data-i18n="label_ideal_result">Peso ideal</span>
         <span class="result-value" id="resultPeso">—</span>
       </div>
     </div>
@@ -196,20 +202,24 @@
   <div class="modal-backdrop" onclick="closeModal('aboutModal')"></div>
   <div class="modal-panel">
     <div class="modal-header">
-      <h2>Acerca de DosisUCI</h2>
+      <h2 data-i18n="modal_about_title">Acerca de DosisUCI</h2>
       <button class="modal-close" onclick="closeModal('aboutModal')" aria-label="Cerrar">✕</button>
     </div>
     <div class="modal-body about-body">
-      <p>Calculadora de dosis para medicamentos de uso frecuente en <strong>UCI</strong>. Vasopresores, inotrópicos, vasodilatadores, sedoanalgesia y bloqueantes neuromusculares.</p>
-      <p>La información está basada en guías clínicas y publicaciones revisadas por médicos y farmacéuticos. <strong>No reemplaza el criterio clínico.</strong> La interpretación es responsabilidad del profesional tratante.</p>
-      <p>Esta aplicación <strong>no almacena ni comparte</strong> datos ingresados.</p>
-      <p style="monospace;font-size:.78rem"><b>Mail:</b> diegos91+app@gmail.com</p>
-      <p style="font-family:'Space Mono',monospace;font-size:.78rem;color:var(--text-3);">v3.1 · Vanilla JS · Sin dependencias externas · Licencia CC BY-NC 4.0</p>
+      <p data-i18n-html="about_p1">Calculadora de dosis para medicamentos de uso frecuente en <strong>UCI</strong>. Vasopresores, inotrópicos, vasodilatadores, sedoanalgesia y bloqueantes neuromusculares.</p>
+      <p data-i18n-html="about_p2">La información está basada en guías clínicas y publicaciones revisadas por médicos y farmacéuticos. <strong>No reemplaza el criterio clínico.</strong> La interpretación es responsabilidad del profesional tratante.</p>
+      <p data-i18n-html="about_p3">Esta aplicación <strong>no almacena ni comparte</strong> datos ingresados.</p>
+      <p data-i18n-html="about_mail" style="font-size:.78rem"></p>
+      <p data-i18n-html="about_version" style="font-family:'Space Mono',monospace;font-size:.78rem;color:var(--text-3);"></p>
       <div class="about-links">
-        <a href="https://play.google.com/store/apps/details?id=com.dosisutifree1.app" target="_blank" rel="noopener">
+        <a href="https://play.google.com/store/apps/details?id=com.dosisutifree1.app"
+           target="_blank" rel="noopener"
+           data-i18n="about_rate">
           Calificar en Google Play ↗
         </a>
-        <a href="https://play.google.com/store/apps/details?id=com.dosisutipro.app" target="_blank" rel="noopener">
+        <a href="https://play.google.com/store/apps/details?id=com.dosisutipro.app"
+           target="_blank" rel="noopener"
+           data-i18n="about_pro_link">
           Versión PRO en Google Play ↗
         </a>
       </div>
@@ -217,7 +227,8 @@
   </div>
 </div>
 
-<!-- Scripts: dosis.js siempre, clinical.js opcional (no en repo público) -->
+<!-- Scripts -->
+<script src="i18n.js"></script>
 <script src="dosis.js"></script>
 <script src="clinical.js" onerror="console.info('clinical.js no cargado — modo público.')"></script>
 <script src="app.js"></script>
