@@ -34,7 +34,7 @@ Herramienta clínica para el cálculo rápido y preciso de velocidades de infusi
 
 ## Uso
 
-`https://diegos91.github.io/dosisUCI`
+`https://diegogs91.github.io/DosisUTI/`
 
 ## Aviso legal
 
