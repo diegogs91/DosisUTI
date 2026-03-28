@@ -42,7 +42,7 @@ const DRUG_CATEGORIES = [
 const NO_WEIGHT_DRUGS = new Set(['Vasopresina','Nitroglicerina','Morfina','Labetalol']);
 
 const DRUGS = {
-  Noradrenalina: { cant:16, ml:266, cons:16.666, max:4, min:0.01, unit:'mcg/kg/min', cant1:32, ml1:282, cant2:32, ml2:132, a1:'16 mg · 250 ml Dx 5%', a2:'32 mg · 250 ml Dx 5%', a3:'32 mg · 100 ml Dx 5%', stepMax:5, stepLimit:25 },
+  Noradrenalina: { cant:16, ml:266, cons:16.666, max:4, min:0.01, unit:'mcg/kg/min', cant1:32, ml1:282, cant2:8, ml2:100, a1:'16 mg · 250 ml Dx 5%', a2:'32 mg · 250 ml Dx 5%', a3:'8 mg · 100 ml Dx 5%', stepMax:5, stepLimit:25 },
   Dopamina:      { cant:400, ml:250, cons:16.666, max:50, min:2, unit:'mcg/kg/min', cant1:800, ml1:250, a1:'400 mg · 250 ml Dx 5%', a2:'800 mg · 250 ml Dx 5%' },
   Vasopresina:   { cant:20, ml:250, cons:0.0166, max:0.1, min:0.01, unit:'UI/min', cant1:20, ml1:50, cant2:40, ml2:50, a1:'20 UI · 250 ml Dx 5%', a2:'20 UI · 50 ml Dx 5%', a3:'40 UI · 50 ml Dx 5%' },
   Adrenalina:    { cant:10, ml:250, cons:16.66, max:2, min:0.05, unit:'mcg/kg/min', cant1:20, ml1:250, cant2:10, ml2:110, a1:'10 mg · 250 ml Dx 5%', a2:'20 mg · 250 ml Dx 5%', a3:'10 mg · 100 ml Dx 5%', stepMax:5, stepLimit:50 },
